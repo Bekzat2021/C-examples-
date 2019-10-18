@@ -2,107 +2,27 @@
 
 #include "pch.h"
 #include <iostream>
-#include <string>
-#include <string.h>
 
-
-class MyString {
-private:
-	char* buffer;
-
-	MyString() {};
-	
-public:
-	MyString(const char* initialString) {
-		if (initialString!=NULL)
-		{
-			buffer = new char[strlen(initialString) + 1];
-			strcpy_s(
-				buffer,
-				strlen(initialString) + 1,
-				initialString
-				);
-		}
-		else {
-			buffer = NULL;
-		}
-	}
-
-	MyString(const MyString &copySource) {
-		buffer = NULL;
-		if (copySource.buffer!=NULL)
-		{
-			buffer = new char[strlen(copySource.buffer) + 1];
-
-			strcpy_s(
-				buffer,
-				strlen(copySource.buffer) + 1,
-				copySource.buffer
-			);
-		}
-	}
-
-	MyString operator =(const MyString &copySource) {
-		if ((this!=&copySource) && (copySource.buffer!=NULL))
-		{
-			if (buffer!=NULL)
-			{
-				delete[] buffer;
-			}
-
-			buffer = new char[strlen(copySource.buffer) + 1];
-
-			strcpy_s(
-				buffer,
-				strlen(copySource.buffer) + 1,
-				copySource.buffer
-			);
-		}
-	}
-
-	const char& operator[] (int index) const {
-		if (index<GetLength())
-		{
-			return buffer[index];
-		}
-	}
-
-	~MyString() {
-		if (buffer!=NULL)
-		{
-			delete[] buffer;
-		}
-	}
-
-	int GetLength() const{
-		return strlen(buffer);
-	}
-
-	operator const char* () {
-		return buffer;
-	}
+struct Temperature {
+	double Kelvin;
+	Temperature(long double kelvin):Kelvin(kelvin){}
 };
 
+Temperature operator"" _C(long double celcius) {
+	return Temperature(celcius + 273);
+}
+
+Temperature operator "" _F(long double fahrenheit) {
+	return Temperature((fahrenheit + 459.67) * 5 / 9);
+}
+
 int main() {
-	
-	std::cout << "Type a statement: ";
-	std::string strInput;
-	getline(std::cin, strInput);
 
-	MyString youSaid(strInput.c_str());
+	Temperature k1 = 31.73_F;
+	Temperature k2 = 0.0_C;
 
-	std::cout << "Using operator[] for displaying your input: " << std::endl;
-	for (int index = 0; index < youSaid.GetLength(); index++)
-	{
-		std::cout << youSaid[index] << " ";
-	}
-	std::cout << std::endl;
-
-	std::cout << "Enter index 0 - " << youSaid.GetLength() - 1 << ": ";
-	int index = 0;
-	std::cin >> index;
-	std::cout << "Input character at zero-based position: " << index;
-	std::cout << " is: " << youSaid[index] << std::endl;
+	std::cout << "k1 is " << k1.Kelvin << " Kelvin" << std::endl;
+	std::cout << "k2 is " << k2.Kelvin << " Kelvin " << std::endl;
 
 	return 0;
 }

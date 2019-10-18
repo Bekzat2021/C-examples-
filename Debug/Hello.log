@@ -1,3 +1,2 @@
 ﻿  Hello.cpp
-c:\users\becza\desktop\c++\1.1\hello\hello.cpp(68): warning C4715: 'MyString::operator[]': not all control paths return a value
   Hello.vcxproj -> C:\Users\Becza\Desktop\C++\1.1\Hello\Debug\Hello.exe
