@@ -1,28 +1,31 @@
 // Hello.cpp : This file contains the 'main' function. Program execution begins and ends there.
-
 #include "pch.h"
 #include <iostream>
+#include <string>
 
-struct Temperature {
-	double Kelvin;
-	Temperature(long double kelvin):Kelvin(kelvin){}
-};
+using namespace std;
 
-Temperature operator"" _C(long double celcius) {
-	return Temperature(celcius + 273);
-}
-
-Temperature operator "" _F(long double fahrenheit) {
-	return Temperature((fahrenheit + 459.67) * 5 / 9);
-}
+#define SQUARE(x) ( (x) * (x) )
+#define PI 3.1416
+#define AREA_CIRCLE(r) ( PI * (r) * (r) )
+#define MAX(a, b) (( (a) > (b) ) ? (a) : (b))
+#define MIN(a, b) (( (a) < (b) ) ? (a) : (b))
 
 int main() {
+	cout << "Enter a integer: ";
+	int num = 0;
+	cin >> num;
 
-	Temperature k1 = 31.73_F;
-	Temperature k2 = 0.0_C;
+	cout << "SQUARE (" << num << ") = " << SQUARE(num) << endl;
+	cout << "Area of a circle with radius " << num << " is: ";
+	cout<< AREA_CIRCLE(num) << endl;
+	
+	cout << "Enter anoter integer: ";
+	int num2 = 0;
+	cin >> num2;
 
-	std::cout << "k1 is " << k1.Kelvin << " Kelvin" << std::endl;
-	std::cout << "k2 is " << k2.Kelvin << " Kelvin " << std::endl;
+	cout << "MIN (" << num << ", " << num2 << ") = " << MIN(num, num2) << endl;
+	cout << "MAX (" << num << ", " << num2 << ") = " << MAX(num, num2) << endl;
 
 	return 0;
 }
