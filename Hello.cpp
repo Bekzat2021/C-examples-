@@ -3,29 +3,27 @@
 #include <iostream>
 #include <string>
 
-using namespace std;
+template <typename T>
+class TestStatic {
+public:
+	static int staticVal;
+};
 
-#define SQUARE(x) ( (x) * (x) )
-#define PI 3.1416
-#define AREA_CIRCLE(r) ( PI * (r) * (r) )
-#define MAX(a, b) (( (a) > (b) ) ? (a) : (b))
-#define MIN(a, b) (( (a) < (b) ) ? (a) : (b))
+template <typename T> int TestStatic<T>::staticVal;
 
 int main() {
-	cout << "Enter a integer: ";
-	int num = 0;
-	cin >> num;
 
-	cout << "SQUARE (" << num << ") = " << SQUARE(num) << endl;
-	cout << "Area of a circle with radius " << num << " is: ";
-	cout<< AREA_CIRCLE(num) << endl;
-	
-	cout << "Enter anoter integer: ";
-	int num2 = 0;
-	cin >> num2;
+	TestStatic<int> intInstance;
+	std::cout << "Setting static val for intInstance to 2013" << std::endl;
+	intInstance.staticVal = 2013;
 
-	cout << "MIN (" << num << ", " << num2 << ") = " << MIN(num, num2) << endl;
-	cout << "MAX (" << num << ", " << num2 << ") = " << MAX(num, num2) << endl;
+	TestStatic<double> doubleInstance;
+	std::cout << "Setting static val for doubleInstance to 2019" << std::endl;
+	doubleInstance.staticVal = 2019;
+
+	std::cout << "intInstance.staticVal = " << intInstance.staticVal << std::endl;
+	std::cout << "doubleInstance.staticVal = " << doubleInstance.staticVal << std::endl;
 
 	return 0;
 }
+
