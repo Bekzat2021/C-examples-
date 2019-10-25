@@ -1,29 +1,19 @@
 // Hello.cpp : This file contains the 'main' function. Program execution begins and ends there.
 #include "pch.h"
 #include <iostream>
-#include <string>
+using namespace std;
 
 template <typename T>
-class TestStatic {
+class EverythingButInt {
 public:
-	static int staticVal;
+	EverythingButInt() {
+		static_assert(sizeof(T) != sizeof(int), "No int please!");
+	}
 };
 
-template <typename T> int TestStatic<T>::staticVal;
-
 int main() {
-
-	TestStatic<int> intInstance;
-	std::cout << "Setting static val for intInstance to 2013" << std::endl;
-	intInstance.staticVal = 2013;
-
-	TestStatic<double> doubleInstance;
-	std::cout << "Setting static val for doubleInstance to 2019" << std::endl;
-	doubleInstance.staticVal = 2019;
-
-	std::cout << "intInstance.staticVal = " << intInstance.staticVal << std::endl;
-	std::cout << "doubleInstance.staticVal = " << doubleInstance.staticVal << std::endl;
-
+	EverythingButInt<double> Test;
+	
 	return 0;
 }
 
