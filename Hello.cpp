@@ -1,45 +1,28 @@
 // Hello.cpp : This file contains the 'main' function. Program execution begins and ends there.
 #include "pch.h"
 #include <iostream>
-#include <vector>
-#include <algorithm>
-#include <deque>
-
-using namespace std;
+#include <string>
 
 int main() {
 
-	// Dynamic array
-	deque <int> intArray;
+	const char* constCStyleString = "Hello String!";
+	std::cout << "Constant string is: " << constCStyleString << std::endl;
 
-	// Inserting values
-	intArray.push_back(50);
-	intArray.push_back(2991);
-	intArray.push_back(23);
-	intArray.push_back(9999);
+	std::string strFromConst(constCStyleString);
 
-	cout << "The content of the vector are: " << endl;
+	std::cout << "strFromConst is: " << strFromConst << std::endl;
 
-	// walk the vector and read values
-	deque <int>::iterator arrIterator = intArray.begin();
+	std::string str2("Hello string!");
+	std::string str2Copy(str2);
 
-	while (arrIterator!=intArray.end())
-	{
-		cout << *arrIterator << endl;
+	std::cout << "str2Copy is: " << str2Copy << std::endl;
 
-		arrIterator++;
-	}
+	std::string partialCopy(constCStyleString, 5);
+	std::cout << "strPatialCopy is: " << partialCopy << std::endl;
 
-	// searching value 2991
-	deque <int>::iterator elFound = find(intArray.begin(), intArray.end(), 2991);
 
-	if (elFound!=intArray.end())
-	{
-		// determine position
-		int elPos = distance(intArray.begin(), elFound);
-		cout << "Value " << *elFound;
-		cout << " found in the vector at position: " << elPos << endl;
-	}
+	std::string strRepeatChars(10, 'b');
+	std::cout << "strRepeatChars is: " << strRepeatChars << std::endl;
 
 	return 0;
 }
