@@ -1,33 +1,45 @@
 // Hello.cpp : This file contains the 'main' function. Program execution begins and ends there.
 #include "pch.h"
 #include <iostream>
+#include <vector>
+#include <algorithm>
+#include <deque>
 
 using namespace std;
 
-template <typename T1, typename T2>
-class TemplateArray {
-private:
-	T1* firstArray;
-	T2* secondArray;
-
-public:
-	TemplateArray(T1* firstInput, T2* secondInput):firstArray(firstInput), secondArray(secondInput){}
-
-	void ShowFirstArr() {
-		for (T1 f: firstArray)
-		{
-			cout << f << endl;
-		}
-	}
-};
-
 int main() {
-	
-	int arr[10] = { 1,2,3,4,5,6,7,8,9,10 };
-	int arr2[10] = { 1,2,3,4,5,6,7,8,9,10 };
 
-	TemplateArray<int, int> arr(arr, arr2);
-	
+	// Dynamic array
+	deque <int> intArray;
+
+	// Inserting values
+	intArray.push_back(50);
+	intArray.push_back(2991);
+	intArray.push_back(23);
+	intArray.push_back(9999);
+
+	cout << "The content of the vector are: " << endl;
+
+	// walk the vector and read values
+	deque <int>::iterator arrIterator = intArray.begin();
+
+	while (arrIterator!=intArray.end())
+	{
+		cout << *arrIterator << endl;
+
+		arrIterator++;
+	}
+
+	// searching value 2991
+	deque <int>::iterator elFound = find(intArray.begin(), intArray.end(), 2991);
+
+	if (elFound!=intArray.end())
+	{
+		// determine position
+		int elPos = distance(intArray.begin(), elFound);
+		cout << "Value " << *elFound;
+		cout << " found in the vector at position: " << elPos << endl;
+	}
+
 	return 0;
 }
-

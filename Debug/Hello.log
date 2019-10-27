@@ -1,13 +1,2 @@
 ﻿  Hello.cpp
-c:\users\becza\desktop\c++\1.1\hello\hello.cpp(10): error C2087: 'firstArray': missing subscript
-  c:\users\becza\desktop\c++\1.1\hello\hello.cpp(29): note: see reference to class template instantiation 'TemplateArray<int [],int []>' being compiled
-c:\users\becza\desktop\c++\1.1\hello\hello.cpp(11): error C2087: 'secondArray': missing subscript
-c:\users\becza\desktop\c++\1.1\hello\hello.cpp(14): error C2087: 'firstInput': missing subscript
-c:\users\becza\desktop\c++\1.1\hello\hello.cpp(14): error C2087: 'secondInput': missing subscript
-c:\users\becza\desktop\c++\1.1\hello\hello.cpp(29): error C2040: 'arr': 'TemplateArray<int [],int []>' differs in levels of indirection from 'int [10]'
-c:\users\becza\desktop\c++\1.1\hello\hello.cpp(29): error C2664: 'TemplateArray<int [],int []>::TemplateArray(TemplateArray<int [],int []> &&)': cannot convert argument 1 from 'int [10]' to 'T1 []'
-          with
-          [
-              T1=int []
-          ]
-  c:\users\becza\desktop\c++\1.1\hello\hello.cpp(29): note: Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or function-style cast
+  Hello.vcxproj -> C:\Users\Becza\Desktop\C++\1.1\Hello\Debug\Hello.exe
