@@ -1,28 +1,36 @@
 // Hello.cpp : This file contains the 'main' function. Program execution begins and ends there.
+
 #include "pch.h"
 #include <iostream>
 #include <string>
 
 int main() {
 
-	const char* constCStyleString = "Hello String!";
-	std::cout << "Constant string is: " << constCStyleString << std::endl;
+	std::string sampleStr("Good day String! Today is beautiful!");
+	std::cout << "Sample string is: " << sampleStr << std::endl << std::endl;
 
-	std::string strFromConst(constCStyleString);
+	size_t charPos = sampleStr.find("day", 0);
 
-	std::cout << "strFromConst is: " << strFromConst << std::endl;
+	if (charPos!=std::string::npos)
+	{
+		std::cout << "First instance \"day\" at pos. " << charPos << std::endl;
+	}
+	else 
+	{
+		std::cout << "Substring not found!" << std::endl;
+	}
 
-	std::string str2("Hello string!");
-	std::string str2Copy(str2);
+	std::cout << "Locating all instances of substring \"day\"" << std::endl;
+	size_t subStrPos = sampleStr.find("day", 0);
 
-	std::cout << "str2Copy is: " << str2Copy << std::endl;
+	while (subStrPos!=std::string::npos)
+	{
+		std::cout << "\"day\" found at position " << subStrPos << std::endl;
 
-	std::string partialCopy(constCStyleString, 5);
-	std::cout << "strPatialCopy is: " << partialCopy << std::endl;
+		size_t searchOffset = subStrPos + 1;
 
-
-	std::string strRepeatChars(10, 'b');
-	std::cout << "strRepeatChars is: " << strRepeatChars << std::endl;
+		subStrPos = sampleStr.find("day", searchOffset);
+	}
 
 	return 0;
 }
