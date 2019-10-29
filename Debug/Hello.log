@@ -1,2 +1,2 @@
 ﻿  Hello.cpp
-  Hello.vcxproj -> C:\Users\Becza\Desktop\C++\1.1\Hello\Debug\Hello.exe
+c:\users\becza\desktop\c++\1.1\hello\hello.cpp(13): error C3688: invalid literal suffix 's'; literal operator or literal operator template 'operator ""s' not found
