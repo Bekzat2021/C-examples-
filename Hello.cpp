@@ -6,36 +6,25 @@
 
 using namespace std;
 
-void DisplayVector(const vector<int>& inVec) {
-	
-	for (auto element=inVec.begin(); element!=inVec.end(); element++)
-	{
-		cout << *element << ' ';
-	}
-
-	cout << endl;
-}
-
 int main() {
 
-	vector<int> integers(4, 90);
+	vector<int> integers{ 50, 1, 987, 1001 };
 
-	cout << "The initial contents of the vector: ";
-	DisplayVector(integers);
+	for (size_t index = 0; index < integers.size(); index++)
+	{
+		cout << "Elements [" << index << "] = ";
+		cout << integers.at(index) << endl;
+	}
 
-	integers.insert(integers.begin(), 25);
+	integers[2] = 2011;
+	cout << "After replacement: ";
+	cout << "Element[2] = " << integers[2] << endl;
 
-	integers.insert(integers.end(), 2, 45);
-
-	cout << "Vector after inserting elements at the beginning and end: ";
-	DisplayVector(integers);
-
-	vector<int> another(2, 30);
-
-	integers.insert(integers.begin() + 1, another.begin(), another.end());
-
-	cout << "Vector after inserting contents from another vector in the middle: ";
-	DisplayVector(integers);
+	for (size_t index = 0; index < integers.size(); index++)
+	{
+		cout << "Elements [" << index << "] = ";
+		cout << integers.at(index) << endl;
+	}
 
 	return 0;
 }
