@@ -1,2 +1,4 @@
 ﻿  Hello.cpp
+c:\users\becza\desktop\c++\1.1\hello\hello.cpp(63): warning C4018: '<': signed/unsigned mismatch
+c:\users\becza\desktop\c++\1.1\hello\hello.cpp(124): warning C4018: '<': signed/unsigned mismatch
   Hello.vcxproj -> C:\Users\Becza\Desktop\C++\1.1\Hello\Debug\Hello.exe
