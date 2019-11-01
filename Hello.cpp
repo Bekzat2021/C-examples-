@@ -2,28 +2,44 @@
 
 #include "pch.h"
 #include <iostream>
-#include <vector>
-
+#include <deque>
+#include <algorithm>
 using namespace std;
 
 int main() {
+	
+	deque<int> intDeque;
 
-	vector<int> integers{ 50, 1, 987, 1001 };
+	intDeque.push_back(3);
+	intDeque.push_back(4);
+	intDeque.push_back(5);
 
-	for (size_t index = 0; index < integers.size(); index++)
+	intDeque.push_front(2);
+	intDeque.push_front(1);
+	intDeque.push_front(0);
+
+	cout << "The contents of the deque after inserting elements ";
+	cout << "at the top and bottom are: " << endl;
+
+	for (size_t count = 0; count < intDeque.size(); count++)
 	{
-		cout << "Elements [" << index << "] = ";
-		cout << integers.at(index) << endl;
+		cout << "Element [" << count << "] = " << intDeque[count] << endl;
 	}
 
-	integers[2] = 2011;
-	cout << "After replacement: ";
-	cout << "Element[2] = " << integers[2] << endl;
+	cout << endl;
 
-	for (size_t index = 0; index < integers.size(); index++)
+	intDeque.pop_front();
+
+	intDeque.pop_back();
+
+	cout << "The contents of the deque after erasing element ";
+	cout << "at the top and bottom are: " << endl;
+
+	for (auto element = intDeque.begin(); element != intDeque.end(); element++)
 	{
-		cout << "Elements [" << index << "] = ";
-		cout << integers.at(index) << endl;
+		size_t offset = distance(intDeque.begin(), element);
+
+		cout << "Element [" << offset << "] = " << *element << endl;
 	}
 
 	return 0;
