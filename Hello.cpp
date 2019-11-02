@@ -20,7 +20,18 @@ int main() {
 	{
 		cout << "Enter a value " << i << ": ";
 		cin >> inputValue;
+		
+		vector<int>::iterator userInt;
+
+		userInt = find(userArray.begin(), userArray.end(), inputValue);
+
+		if (userInt!=userArray.end())
+		{
+			cout << "Your value already was in array" << endl;
+		}
+
 		userArray.push_back(inputValue);
+
 		inputValue = 0;
 	}
 
