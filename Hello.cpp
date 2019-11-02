@@ -2,45 +2,46 @@
 
 #include "pch.h"
 #include <iostream>
-#include <deque>
-#include <algorithm>
+#include <vector>
+
 using namespace std;
 
 int main() {
 	
-	deque<int> intDeque;
+	vector<int> userArray;
 
-	intDeque.push_back(3);
-	intDeque.push_back(4);
-	intDeque.push_back(5);
+	cout << "How many integers you want to save " << endl;
+	cout << "> ";
+	int index = 0;
+	cin >> index;
 
-	intDeque.push_front(2);
-	intDeque.push_front(1);
-	intDeque.push_front(0);
-
-	cout << "The contents of the deque after inserting elements ";
-	cout << "at the top and bottom are: " << endl;
-
-	for (size_t count = 0; count < intDeque.size(); count++)
+	int inputValue = 0;
+	for (size_t i = 0; i < index; i++)
 	{
-		cout << "Element [" << count << "] = " << intDeque[count] << endl;
+		cout << "Enter a value " << i << ": ";
+		cin >> inputValue;
+		userArray.push_back(inputValue);
+		inputValue = 0;
 	}
 
-	cout << endl;
-
-	intDeque.pop_front();
-
-	intDeque.pop_back();
-
-	cout << "The contents of the deque after erasing element ";
-	cout << "at the top and bottom are: " << endl;
-
-	for (auto element = intDeque.begin(); element != intDeque.end(); element++)
+	for (size_t i = 0; i < userArray.size(); i++)
 	{
-		size_t offset = distance(intDeque.begin(), element);
-
-		cout << "Element [" << offset << "] = " << *element << endl;
+		cout << i << " = " << userArray[i] << endl;
 	}
 
+	cout << "What value you want to see? " << endl;
+	cout << "Enter a index: ";
+	index = 0;
+	cin >> index;
+
+	if ((index>=userArray.size()) || (index<0))
+	{
+		cout << "You entered wrong value. " << endl;
+	}
+	else 
+	{
+		cout << "Element at index " << index << " = " << userArray[index] << endl;
+	}
+	
 	return 0;
 }
