@@ -2,57 +2,29 @@
 
 #include "pch.h"
 #include <iostream>
-#include <vector>
+#include <deque>
+#include <string>
 
 using namespace std;
 
+template <typename T>
+void DisplayItems(deque<T> values, int size) {
+
+	for (auto element=values.cbegin(); element!=values.cend(); element++)
+	{
+		cout << *element << " ";
+	}
+	
+	cout << endl;
+}
+
 int main() {
 	
-	vector<int> userArray;
+	deque<string> strings = { "Hello", "Containers are cool!", "C++ is evolving!" };	
+	DisplayItems(strings, strings.size());
 
-	cout << "How many integers you want to save " << endl;
-	cout << "> ";
-	int index = 0;
-	cin >> index;
+	deque<int> ints = { 12, 13, 14, 15, 16 };
+	DisplayItems(ints, ints.size());
 
-	int inputValue = 0;
-	for (size_t i = 0; i < index; i++)
-	{
-		cout << "Enter a value " << i << ": ";
-		cin >> inputValue;
-		
-		vector<int>::iterator userInt;
-
-		userInt = find(userArray.begin(), userArray.end(), inputValue);
-
-		if (userInt!=userArray.end())
-		{
-			cout << "Your value already was in array" << endl;
-		}
-
-		userArray.push_back(inputValue);
-
-		inputValue = 0;
-	}
-
-	for (size_t i = 0; i < userArray.size(); i++)
-	{
-		cout << i << " = " << userArray[i] << endl;
-	}
-
-	cout << "What value you want to see? " << endl;
-	cout << "Enter a index: ";
-	index = 0;
-	cin >> index;
-
-	if ((index>=userArray.size()) || (index<0))
-	{
-		cout << "You entered wrong value. " << endl;
-	}
-	else 
-	{
-		cout << "Element at index " << index << " = " << userArray[index] << endl;
-	}
-	
 	return 0;
 }
