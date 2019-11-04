@@ -1,51 +1,74 @@
 // Hello.cpp : This file contains the 'main' function. Program execution begins and ends there.
 
 #include "pch.h"
-#include <list>
 #include <iostream>
-
+#include <string>
+#include <list>
 using namespace std;
 
 template <typename T>
-void DisplayContents(const T& container) {
+void DisplayAsContents(const T &container) {
 	for (auto element = container.cbegin(); element != container.cend(); element++)
 	{
 		cout << *element << ' ';
+		cout << endl;
 	}
 	cout << endl;
 }
 
+struct ConstactItem
+{
+	string name;
+	string phone;
+	string displayAs;
+
+	ConstactItem(const string &conName, const string &conNum){
+		name = conName;
+		phone = conNum;
+		displayAs = (name + ": " + phone);
+	}
+
+	bool operator == (const ConstactItem &itemToCompare) const {
+		return (itemToCompare.name == this->name);
+	}
+
+	bool operator < (const ConstactItem &itemToCompare) const {
+		return (this->displayAs < itemToCompare.displayAs);
+	}
+
+	operator const char*() const {
+		return displayAs.c_str();
+	}
+};
+
+bool SortOnPhoneNumber(const ConstactItem &item1, const ConstactItem &item2) {
+	return (item1.phone < item2.phone);
+}
+
 int main() {
 
-	list<int> linkInts1;
+	list< ConstactItem> contacts;
+	contacts.push_back(ConstactItem("Jack Welsch", "+1 7889879879"));
+	contacts.push_back(ConstactItem("Bill Gates", "+1 97789787998"));
+	contacts.push_back(ConstactItem("Angi Merkel", "+49 234565466"));
+	contacts.push_back(ConstactItem("Vlad Putin", "+7 66454564797"));
+	contacts.push_back(ConstactItem("Dan Creig", "+44 123641976"));
 
-	linkInts1.insert(linkInts1.cbegin(), 2);
-	linkInts1.insert(linkInts1.cbegin(), 1);
+	cout << "List in initial order: " << endl;
+	DisplayAsContents(contacts);
 
-	linkInts1.insert(linkInts1.cend(), 3);
+	contacts.sort();
+	cout << "Sorting in alphabetical order via operator<: " << endl;
+	DisplayAsContents(contacts);
 
-	cout << "The contents of list 1 after inserting elements: " << endl;
-	DisplayContents(linkInts1);
+	contacts.sort(SortOnPhoneNumber);
+	cout << "Sorting in order of phone numbers via predicate: " << endl;
+	DisplayAsContents(contacts);
 
-	list<int> linkInts2;
-
-	linkInts2.insert(linkInts2.begin(), 4, 0);
-
-	cout << "The contents of list 2 after inserting ' ";
-	cout << linkInts2.size() << " ' elements of value: " << endl;
-	DisplayContents(linkInts2);
-
-	list<int> linkInts3;
-
-	linkInts3.insert(linkInts3.begin(), linkInts1.begin(), linkInts1.end());
-
-	cout << "The contents of list 3 after inserting contents of list 1 at the beginning: " << endl;
-	DisplayContents(linkInts3);
-
-	linkInts3.insert(linkInts3.end(), linkInts2.begin(), linkInts2.end());
-
-	cout << "The contents of list 3 after inserting contents of list 2 at the end: " << endl;
-	DisplayContents(linkInts3);
+	cout << "Erasing Putin from the list: " << endl;
+	contacts.remove(ConstactItem("Vlad Putin", ""));
+	DisplayAsContents(contacts);
 
 	return 0;
 }
+
