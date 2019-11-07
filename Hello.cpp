@@ -1,13 +1,21 @@
 // Hello.cpp : This file contains the 'main' function. Program execution begins and ends there.
 
 #include "pch.h"
+#include <set>
 #include <iostream>
-#include <list>
 
 using namespace std;
 
 template <typename T>
-void DisplayContents(const T &container) {
+struct SortDescending
+{
+	bool operator()(const T &lhs, const T &rhs) const {
+		return (lhs > rhs);
+	}
+};
+
+template <typename T>
+void DisplayContent(const T &container) {
 	for (auto element = container.cbegin(); element != container.cend(); element++)
 	{
 		cout << *element << ' ';
@@ -17,21 +25,22 @@ void DisplayContents(const T &container) {
 
 int main() {
 
-	list<int> listInts{ 1,2,3,4,5,6 };
+	set<int> setInts{ 202, 151, -999, -1 };
+	setInts.insert(-1);
 
-	list<int>::const_iterator iterator1 = listInts.cbegin();
+	cout << "Contents of the set: " << endl;
+	DisplayContent(setInts);
 
-	cout << "iterator1 is: " << *iterator1 << endl;
+	multiset<int> msetInts;
+	msetInts.insert(setInts.cbegin(), setInts.cend());
+	msetInts.insert(-1);
 
-	DisplayContents(listInts);
+	cout << "Contents of multiset: " << endl;
+	DisplayContent(msetInts);
 
-	listInts.push_front(326);
-
-	cout << "iterator1 is: " << *iterator1 << endl;
-
-	DisplayContents(listInts);
+	cout << "Number of instances of '-1' in the multiset are: '";
+	cout << msetInts.count(-1) << "'" << endl;
 
 	return 0;
-
 }
 
