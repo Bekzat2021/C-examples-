@@ -2,7 +2,8 @@
 
 #include "pch.h"
 #include <iostream>
-#include <unordered_set>
+#include <set>
+#include <string>
 
 using namespace std;
 
@@ -10,33 +11,54 @@ template <typename T>
 void DisplayContents(const T &cont)  {
 	for (auto element = cont.cbegin(); element != cont.cend(); element++)
 	{
-		cout << *element << ' ';
+		cout << *element << ' ' << endl;;
 	}
 	cout << endl;
-
 }
 
-struct ContactItems
+struct Dictionary
 {
-private:
-	string name;
-	string phone;
+	string word;
+	string meaning;
+	string displayAs;
 
 public:
-	ContactItems(string &inputName, string &inputPhone) :name(inputName), phone(inputPhone) {};
-
-	bool operator == (ContactItems &contactToCompare) const {
-		return (contactToCompare.phone == this->phone);
+	Dictionary(const string &inputWord, const string &inputMeaning) {
+		word = inputWord;
+		meaning = inputMeaning;
+		displayAs = word + ": " + meaning;
 	}
 
-	bool operator < (ContactItems &contactToCompare) const {
-		return (this->phone < contactToCompare.phone);
+	bool operator < (const Dictionary &dic) const {
+		return (this->word < dic.word);
+	}
+
+	bool operator == (const Dictionary &dic) const {
+		return (this->displayAs == dic.displayAs);
+	}
+
+	operator const char* () const {
+		return displayAs.c_str();
 	}
 };
 
 int main() {
 
-	
+	multiset<Dictionary> Dict1;
+	Dict1.insert(Dictionary("car", "land transport"));
+	Dict1.insert(Dictionary("Canada", "country in north america"));
+	Dict1.insert(Dictionary("cat", "small animal"));
+	Dict1.insert(Dictionary("cat", "small animal"));
+
+	DisplayContents(Dict1);
+
+	set<Dictionary> Dict2;
+	Dict2.insert(Dictionary("car", "land transport"));
+	Dict2.insert(Dictionary("Canada", "country in north america"));
+	Dict2.insert(Dictionary("cat", "small animal"));
+	Dict2.insert(Dictionary("cat", "small animal"));
+
+	DisplayContents(Dict2);
 
 	return 0;
 }
