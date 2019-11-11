@@ -1,64 +1,50 @@
 // Hello.cpp : This file contains the 'main' function. Program execution begins and ends there.
 
 #include "pch.h"
-#include <iostream>
-#include <set>
-#include <string>
 
 using namespace std;
 
+typedef map<int, string> MAP_INT_STRING;
+typedef multimap<int, string> MMAP_INT_STRING;
+
 template <typename T>
-void DisplayContents(const T &cont)  {
+void DisplayContents(const T& cont)
+{
 	for (auto element = cont.cbegin(); element != cont.cend(); element++)
 	{
-		cout << *element << ' ' << endl;;
+		cout << element->first << " -> " << element->second << endl;
 	}
+
 	cout << endl;
 }
 
-struct Dictionary
-{
-	string word;
-	string meaning;
-	string displayAs;
-
-public:
-	Dictionary(const string &inputWord, const string &inputMeaning) {
-		word = inputWord;
-		meaning = inputMeaning;
-		displayAs = word + ": " + meaning;
-	}
-
-	bool operator < (const Dictionary &dic) const {
-		return (this->word < dic.word);
-	}
-
-	bool operator == (const Dictionary &dic) const {
-		return (this->displayAs == dic.displayAs);
-	}
-
-	operator const char* () const {
-		return displayAs.c_str();
-	}
-};
-
 int main() {
 
-	multiset<Dictionary> Dict1;
-	Dict1.insert(Dictionary("car", "land transport"));
-	Dict1.insert(Dictionary("Canada", "country in north america"));
-	Dict1.insert(Dictionary("cat", "small animal"));
-	Dict1.insert(Dictionary("cat", "small animal"));
+	map<int, string> mapIntToStr;
 
-	DisplayContents(Dict1);
+	mapIntToStr.insert(make_pair(3, "Three"));
+	mapIntToStr.insert(make_pair(45, "Fourty Five"));
+	mapIntToStr.insert(make_pair(-1, "Minus One"));
+	mapIntToStr.insert(make_pair(1000, "Thousand"));
 
-	set<Dictionary> Dict2;
-	Dict2.insert(Dictionary("car", "land transport"));
-	Dict2.insert(Dictionary("Canada", "country in north america"));
-	Dict2.insert(Dictionary("cat", "small animal"));
-	Dict2.insert(Dictionary("cat", "small animal"));
+	cout << "The multimap contains " << mapIntToStr.size();
+	cout << " key - value pairs. They are: " << endl;
 
-	DisplayContents(Dict2);
+	DisplayContents(mapIntToStr);
+
+	cout << "Enter the key you wish to find: ";
+	int key = 0;
+	cin >> key;
+
+	map<int, string>::const_iterator pairFound = mapIntToStr.find(key);
+	if (pairFound!=mapIntToStr.end())
+	{
+		cout << "Key " << pairFound->first << " points to value: ";
+		cout << pairFound->second << endl;
+	}
+	else {
+		cout << "Sorry, pair with key " << key << " not in map" << endl;
+	}
 
 	return 0;
 }
