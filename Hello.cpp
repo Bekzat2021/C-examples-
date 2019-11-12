@@ -4,15 +4,11 @@
 
 using namespace std;
 
-typedef map<int, string> MAP_INT_STRING;
-typedef multimap<int, string> MMAP_INT_STRING;
-
 template <typename T>
-void DisplayContents(const T& cont)
-{
-	for (auto element = cont.cbegin(); element != cont.cend(); element++)
+void DisplayContents(const T &cont) {
+	for (multimap<int, string>::const_iterator element = cont.cbegin(); element != cont.cend(); element++)
 	{
-		cout << element->first << " -> " << element->second << endl;
+		cout << element->first << " - > " << element->second << endl;
 	}
 
 	cout << endl;
@@ -20,31 +16,23 @@ void DisplayContents(const T& cont)
 
 int main() {
 
-	map<int, string> mapIntToStr;
+	multimap<int, string> mmapIntToStr;
 
-	mapIntToStr.insert(make_pair(3, "Three"));
-	mapIntToStr.insert(make_pair(45, "Fourty Five"));
-	mapIntToStr.insert(make_pair(-1, "Minus One"));
-	mapIntToStr.insert(make_pair(1000, "Thousand"));
+	mmapIntToStr.insert(make_pair(3, "Three"));
+	mmapIntToStr.insert(make_pair(45, "Fourty Five"));
+	mmapIntToStr.insert(make_pair(-1, "Minus One"));
+	mmapIntToStr.insert(make_pair(1000, "Thousand"));
 
-	cout << "The multimap contains " << mapIntToStr.size();
-	cout << " key - value pairs. They are: " << endl;
+	mmapIntToStr.insert(make_pair(-1, "Minus One"));
+	mmapIntToStr.insert(make_pair(1000, "Thousand"));
 
-	DisplayContents(mapIntToStr);
+	cout << "The multimap contains " << mmapIntToStr.size();
+	cout << " key-value pairs. They are: " << endl;
+	DisplayContents(mmapIntToStr);
 
-	cout << "Enter the key you wish to find: ";
-	int key = 0;
-	cin >> key;
+	multimap<int, string>::difference_type numPairsErased = mmapIntToStr.erase(3);
 
-	map<int, string>::const_iterator pairFound = mapIntToStr.find(key);
-	if (pairFound!=mapIntToStr.end())
-	{
-		cout << "Key " << pairFound->first << " points to value: ";
-		cout << pairFound->second << endl;
-	}
-	else {
-		cout << "Sorry, pair with key " << key << " not in map" << endl;
-	}
+	DisplayContents(mmapIntToStr);
 
 	return 0;
 }
