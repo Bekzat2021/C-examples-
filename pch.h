@@ -9,10 +9,9 @@
 #ifndef PCH_H
 #define PCH_H
 
-#include <map>
-#include <algorithm>
-#include <string>
 #include <iostream>
+#include <string>
+#include <unordered_map>
 
 // TODO: add headers that you want to pre-compile here
 

@@ -4,66 +4,49 @@
 
 using namespace std;
 
-template <typename T>
-void DisplayContetnts(const T &cont) {
+template <typename T1, typename T2>
+void DisplayUnorderedMap(unordered_map<T1, T2>& cont) {
+	cout << "Unordered map contains: " << endl;
 	for (auto element = cont.cbegin(); element != cont.cend(); element++)
 	{
-		cout << element->first << " - > " << element->second << endl;
+		cout << element->first << " -> " << element->second << endl;
 	}
-	cout << endl;
+
+	cout << "Number of pairs, size(): " << cont.size() << endl;
+	cout << "Bucket count = " << cont.bucket_count() << endl;
+	cout << "Current load factor: " << cont.load_factor() << endl;
+	cout << "Max load factor = " << cont.max_load_factor() << endl;
 }
 
-struct PredIgnoreCase
-{
-	bool operator()(const string &str1, const string &str2) const {
-		string str1NoCase(str1), str2NoCase(str2);
-		transform(str1.begin(), str1.end(), str1NoCase.begin(), ::tolower);
-		transform(str2.begin(), str2.end(), str2NoCase.begin(), ::tolower);
-
-		return (str1NoCase < str2NoCase);
-	}
-};
-
-typedef map<string, string> DIR_WITH_CASE;
-typedef map<string, string, PredIgnoreCase> DIR_NOCASE;
-
 int main() {
+	unordered_map<int, string> umapIntToStr;
+	umapIntToStr.insert(make_pair(1, "One"));
+	umapIntToStr.insert(make_pair(45, "Fourty Five"));
+	umapIntToStr.insert(make_pair(1001, "Thousand One"));
+	umapIntToStr.insert(make_pair(-2, "Minus Two"));
+	umapIntToStr.insert(make_pair(-1000, "Minus One Thousand"));
+	umapIntToStr.insert(make_pair(100, "One Hundred"));
+	umapIntToStr.insert(make_pair(12, "Twelve"));
+	umapIntToStr.insert(make_pair(-100, "Minus One Hundred"));
 
-	DIR_WITH_CASE dirWithCase;
+	DisplayUnorderedMap<int, string>(umapIntToStr);
 
-	dirWithCase.insert(make_pair("John", "2345764"));
-	dirWithCase.insert(make_pair("JOHN", "2345764"));
-	dirWithCase.insert(make_pair("Sara", "42367236"));
-	dirWithCase.insert(make_pair("Jack", "32435348"));
 
-	cout << "Displaying content of the case-sensetive map: " << endl;
-	DisplayContetnts(dirWithCase);
+	cout << "\nInsreting one more element" << endl;
+	umapIntToStr.insert(make_pair(300, "Three Hundred"));
+	DisplayUnorderedMap<int, string>(umapIntToStr);
 
-	DIR_NOCASE dirNoCase(dirWithCase.begin(), dirWithCase.end());
+	cout << "\nEnter key to find for: ";
+	int key = 0;
+	cin >> key;
 
-	cout << "Displaying contents of the case-insensitive map: " << endl;
-	DisplayContetnts(dirNoCase);
-
-	cout << "Please enter a name to search" << endl << "> ";
-	string name;
-	cin >> name;
-
-	map<string, string>::iterator pairWithCase = dirWithCase.find(name);
-	if (pairWithCase!=dirWithCase.end())
+	auto element = umapIntToStr.find(key);
+	if (element!=umapIntToStr.cend())
 	{
-		cout << "Num in case-sens. dir: " << pairWithCase->second << endl;
+		cout << "Found! Key pairs with value " << element->second << endl;
 	}
 	else {
-		cout << "Num not found in case-sensetive dir" << endl;
-	}
-
-	map<string, string>::iterator pairNoCase = dirNoCase.find(name);
-	if (pairNoCase!=dirNoCase.end())
-	{
-		cout << "Num found in CI dir: " << pairNoCase->second << endl;
-	}
-	else {
-		cout << "Num not found in case-sensetive dirictory" << endl;
+		cout << "Key has no corresponding pair value!" << endl;
 	}
 
 	return 0;
