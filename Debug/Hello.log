@@ -1,2 +1,8 @@
 ﻿  Hello.cpp
-  Hello.vcxproj -> C:\Users\Becza\Desktop\C++\1.1\Hello\Debug\Hello.exe
+c:\users\becza\desktop\c++\1.1\hello\hello.cpp(26): error C2512: 'IsMultiple<int>': no appropriate default constructor available
+  c:\users\becza\desktop\c++\1.1\hello\hello.cpp(26): note: No constructor could take the source type, or constructor overload resolution was ambiguous
+c:\users\becza\desktop\c++\1.1\hello\hello.cpp(26): error C2672: 'for_each': no matching overloaded function found
+c:\users\becza\desktop\c++\1.1\hello\hello.cpp(26): error C2780: 'void std::for_each(_ExPo &&,_FwdIt,_FwdIt,_Fn) noexcept': expects 4 arguments - 2 provided
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\algorithm(103): note: see declaration of 'std::for_each'
+c:\users\becza\desktop\c++\1.1\hello\hello.cpp(26): error C2780: '_Fn std::for_each(_InIt,_InIt,_Fn)': expects 3 arguments - 2 provided
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\algorithm(85): note: see declaration of 'std::for_each'
