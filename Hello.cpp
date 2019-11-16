@@ -4,20 +4,26 @@
 
 using namespace std;
 
-class CompareStringNoCase {
+template <typename T>
+class DoubleInputItem {
 public:
-	bool operator()(const string &str1, const string &str2) const {
-		string str1ToLowerCase;
-		str1ToLowerCase.resize(str1.size());
+	int timesUsed;
 
-		transform(str1.begin(), str1.end(), str1ToLowerCase.begin(), ::towlower);
+	DoubleInputItem() {
+		timesUsed = 0;
+	}
 
-		string str2ToLowerCase;
-		str2ToLowerCase.resize(str2.size());
+	void operator () ( const T &item)  {
+		timesUsed++;
+		cout << item * item << ' ';
+	}
+};
 
-		transform(str2.begin(), str2.end(), str2ToLowerCase.begin(), ::towlower);
-
-		return (str1ToLowerCase < str2ToLowerCase);
+template <typename T>
+class SortSomething {
+public:
+	bool operator () (const T &item1, const T &item2) const{
+		return (item1 < item2);
 	}
 };
 
@@ -25,29 +31,25 @@ template <typename T>
 void DisplayContents(const T &container) {
 	for (auto element = container.cbegin(); element != container.cend(); element++)
 	{
-		cout << *element << endl;
+		cout << *element << ' ';
 	}
 }
 
 int main() {
 
-	vector <string> names;
+	vector<int> numbers{  5, 7, 10, 4, 11, 3, 6 };
 
-	names.push_back("jim");
-	names.push_back("Jack");
-	names.push_back("Sam");
-	names.push_back("Anna");
+	DoubleInputItem<int> times;
+	times = for_each(numbers.begin(), numbers.end(), DoubleInputItem<int>());
 
-	cout << "The names in vector in order of insertion: " << endl;
-	DisplayContents(names);
+	cout << "\nDoubled used : " << times.timesUsed << " times. "<< endl;
+	
+	cout << "before sorting: " << endl;
+	DisplayContents(numbers);
 
-	cout << "Names after sorting using default std::less<>: " << endl;
-	sort(names.begin(), names.end());
-	DisplayContents(names);
-
-	cout << "Sorting using predicate that ignores case: " << endl;
-	sort(names.begin(), names.end(), CompareStringNoCase());
-	DisplayContents(names);
-
+	cout << "\nAfter sorting: " << endl;
+	sort(numbers.begin(), numbers.end(), SortSomething<int>());
+	DisplayContents(numbers);
+	
 	return 0;
 }
