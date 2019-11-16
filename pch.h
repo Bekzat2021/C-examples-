@@ -11,6 +11,7 @@
 
 #include <algorithm>
 #include <iostream>
+#include <string>
 #include <vector>
 
 // TODO: add headers that you want to pre-compile here

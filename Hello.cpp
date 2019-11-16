@@ -4,49 +4,50 @@
 
 using namespace std;
 
-template <typename elementType>
-class MultiplyTwo {
+class CompareStringNoCase {
 public:
-	elementType operator () (const elementType &elem1, const elementType &elem2 ) {
-		return (elem1 * elem2);
+	bool operator()(const string &str1, const string &str2) const {
+		string str1ToLowerCase;
+		str1ToLowerCase.resize(str1.size());
+
+		transform(str1.begin(), str1.end(), str1ToLowerCase.begin(), ::towlower);
+
+		string str2ToLowerCase;
+		str2ToLowerCase.resize(str2.size());
+
+		transform(str2.begin(), str2.end(), str2ToLowerCase.begin(), ::towlower);
+
+		return (str1ToLowerCase < str2ToLowerCase);
 	}
 };
 
+template <typename T>
+void DisplayContents(const T &container) {
+	for (auto element = container.cbegin(); element != container.cend(); element++)
+	{
+		cout << *element << endl;
+	}
+}
+
 int main() {
 
-	vector<int> multiplicands{ 0, 1, 2, 3, 4 };
-	vector<int> multipliers{ 100, 101, 102, 103, 104 };
+	vector <string> names;
 
-	vector<int> vecResult;
+	names.push_back("jim");
+	names.push_back("Jack");
+	names.push_back("Sam");
+	names.push_back("Anna");
 
-	vecResult.resize(multipliers.size());
+	cout << "The names in vector in order of insertion: " << endl;
+	DisplayContents(names);
 
-	transform(multiplicands.begin(),
-		multiplicands.end(),
-		multipliers.begin(),
-		vecResult.begin(),
-		MultiplyTwo<int>());
+	cout << "Names after sorting using default std::less<>: " << endl;
+	sort(names.begin(), names.end());
+	DisplayContents(names);
 
-	cout << "The contents of the first vector are: " << endl;
-	for (size_t index = 0; index < multiplicands.size(); index++)
-	{
-		cout << multiplicands[index] << ' ';
-	}
-	cout << endl;
-
-	cout << "The contents of the second vector are: " << endl;
-	for (size_t index = 0; index < multipliers.size(); index++)
-	{
-		cout << multipliers[index] << ' ';
-	}
-	cout << endl;
-
-	cout << "The result of multiplication is: " << endl;
-	for (size_t index = 0; index < vecResult.size(); index++)
-	{
-		cout << vecResult[index] << ' ';
-	}
-	cout << endl;
+	cout << "Sorting using predicate that ignores case: " << endl;
+	sort(names.begin(), names.end(), CompareStringNoCase());
+	DisplayContents(names);
 
 	return 0;
 }
