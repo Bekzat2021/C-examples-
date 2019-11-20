@@ -1,40 +1,51 @@
 // Hello.cpp : This file contains the 'main' function. Program execution begins and ends there.
 
 #include "pch.h"
+using namespace std;
 
-int main() {
-	
-	using namespace std;
-
-	vector<int> numsInVec{ 2017, 0, -1, 42, 10101, 25 };
-
-	cout << "Enter number to find in collection: ";
-	int numToFind = 0;
-	cin >> numToFind;
-
-	vector<int>::const_iterator element = find(numsInVec.cbegin(),
-		numsInVec.cend(),
-		numToFind);
-
-
-	if (element!=numsInVec.cend())
+template <typename T>
+void DisplayContents(const T &container) {
+	for (auto element = container.cbegin(); element != container.cend(); element++)
 	{
-		cout << "Value " << *element << " found!" << endl;
+		cout << *element << ' ';
 	}
-	else {
-		cout << "No element contains value " << numToFind << endl;
-	}
+	cout << endl;
+}
 
-	cout << "Finding the first even number using find_if: " << endl;
 
-	vector<int>::const_iterator evenNum = find_if(numsInVec.cbegin(),
+int main() {	
+
+	vector<int> numsInVec{ 2017, 0, -1, 42, 10101, 25, 9, 9, 9 };
+	list<int> numsInList{ -1, 42, 10101 };
+
+	cout << "The contents of the sample vector are: " << endl;
+	DisplayContents(numsInVec);
+
+	cout << "The contents of sample list are: " << endl;
+	DisplayContents(numsInList);
+
+	cout << "search() for the contents of list in vector: " << endl;
+	auto range = search(numsInVec.cbegin(),
 		numsInVec.cend(),
-		[](int element) {return ((element % 2) == 0); });
+		numsInList.cbegin(),
+		numsInList.cend());
 
-	if (evenNum!=numsInVec.cend())
+	if (range!=numsInVec.cend())
 	{
-		cout << "Number '" << *evenNum << "' found at position [";
-		cout << distance(numsInVec.cbegin(), evenNum) << "]" << endl;
+		cout << "Sequence in list found in vector at position: ";
+		cout << distance(numsInVec.cbegin(), range) << endl;
+	}
+
+	cout << "Searching { 9, 9, 9 } in vector in using search_n(): " << endl;
+	auto partialRange = search_n(numsInVec.cbegin(),
+		numsInVec.cend(),
+		3,
+		9);
+
+	if (partialRange!=numsInVec.cend())
+	{
+		cout << "Sequence { 9, 9, 9 } found in vector at position: ";
+		cout << distance(numsInVec.cbegin(), partialRange) << endl;
 	}
 
 	return 0;
