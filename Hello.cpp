@@ -4,7 +4,7 @@
 using namespace std;
 
 template <typename T>
-void DisplayContent(const T &container) {
+void DisplayContents(const T &container) {
 	for (auto element = container.cbegin(); element != container.cend(); element++)
 	{
 		cout << *element << ' ';
@@ -14,33 +14,26 @@ void DisplayContent(const T &container) {
 
 int main() {
 	
-	list<int> numsInList{ 2017, 0, -1, 42, 10101, 25 };
+	vector<int> numsInVec(6);
 
-	cout << "Source (list) contains: " << endl;
-	DisplayContent(numsInList);
-	
-	vector<int> numsInVec(numsInList.size() * 2);
+	fill(numsInVec.begin(), numsInVec.begin() + 3, 8);
+	fill_n(numsInVec.begin() + 3, 3, 5);
 
-	auto lastElement = copy(numsInList.cbegin(),
-		numsInList.cend(),
-		numsInVec.begin());
+	auto rng = default_random_engine{};
+	shuffle(numsInVec.begin(), numsInVec.end(), rng);
 
-	copy_if(numsInList.cbegin(), numsInList.cend(), lastElement,
-		[](int element) {return ((element % 2) != 0); });
+	cout << "The initial contents of vector: " << endl;
+	DisplayContents(numsInVec);
 
-	cout << "Destination vector after copy and copy_if: " << endl;
-	DisplayContent(numsInVec);
+	cout << endl << "'std::replace' value 5 by 8" << endl;
+	replace(numsInVec.begin(), numsInVec.end(), 5, 8);
 
-	auto newEnd = remove(numsInVec.begin(), numsInVec.end(), 0);
-	numsInVec.erase(newEnd, numsInVec.end());
+	cout << "'std::replace_if' even values by -1" << endl;
+	replace_if(numsInVec.begin(), numsInVec.end(),
+		[](int element) {return ((element % 2) == 0); }, -1);
 
-	newEnd = remove_if(numsInVec.begin(), numsInVec.end(),
-		[](int element) {return ((element % 2) != 0); });
-
-	numsInVec.erase(newEnd, numsInVec.end());
-
-	cout << "Destination (vector) after remove, remove_if, erase:  " << endl;
-	DisplayContent(numsInVec);
+	cout << endl << "Vector after replacement:" << endl;
+	DisplayContents(numsInVec);
 
 	return 0;
 }
