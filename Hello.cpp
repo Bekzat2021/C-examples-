@@ -1,39 +1,37 @@
 // Hello.cpp : This file contains the 'main' function. Program execution begins and ends there.
 
 #include "pch.h"
+
 using namespace std;
 
 template <typename T>
-void DisplayContents(const T &container) {
+void DiplayContents(const T &container) {
 	for (auto element = container.cbegin(); element != container.cend(); element++)
 	{
-		cout << *element << ' ';
+		cout << *element << endl;
 	}
-	cout << "| Number of elements: " << container.size() << endl;
 }
 
 int main() {
-	
-	vector<int> numsInVec(6);
+	list<string> names{ "John", "Brad", "jack", "sean", "Anna" };
 
-	fill(numsInVec.begin(), numsInVec.begin() + 3, 8);
-	fill_n(numsInVec.begin() + 3, 3, 5);
+	cout << "Sorted contents of the list are: " << endl;
+	names.sort();
+	DiplayContents(names);
 
-	auto rng = default_random_engine{};
-	shuffle(numsInVec.begin(), numsInVec.end(), rng);
+	cout << "Lower index where \"Brad\" can be inserted is: ";
+	auto minPos = lower_bound(names.begin(), names.end(), "Brad");
+	cout << distance(names.begin(), minPos) <<endl;
 
-	cout << "The initial contents of vector: " << endl;
-	DisplayContents(numsInVec);
+	cout << "Highest index where \"Brad\" can be inserted is: ";
+	auto maxPos = upper_bound(names.begin(), names.end(), "Brad");
+	cout << distance(names.begin(), maxPos) << endl;
 
-	cout << endl << "'std::replace' value 5 by 8" << endl;
-	replace(numsInVec.begin(), numsInVec.end(), 5, 8);
+	cout << endl;
 
-	cout << "'std::replace_if' even values by -1" << endl;
-	replace_if(numsInVec.begin(), numsInVec.end(),
-		[](int element) {return ((element % 2) == 0); }, -1);
-
-	cout << endl << "Vector after replacement:" << endl;
-	DisplayContents(numsInVec);
+	cout << "List after inserting Brad in sorted order: " << endl;
+	names.insert(minPos, "Brad");
+	DiplayContents(names);
 
 	return 0;
 }
