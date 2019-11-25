@@ -12,26 +12,28 @@ void DiplayContents(const T &container) {
 	}
 }
 
+struct CompareString {
+	bool operator () (const string str1, const string str2) {
+		string s1 = str1;
+		string s2 = str2;
+		transform(s1.begin(), s1.end(), s1.begin(), ::tolower);
+		transform(s2.begin(), s2.end(), s2.begin(), ::tolower);
+		return (s1 > s2);
+	}
+};
+
 int main() {
-	list<string> names{ "John", "Brad", "jack", "sean", "Anna" };
+	list<string> someWords{ "oNe", "apple", "Two", "Three", "AA", "can", "DDS" };
 
-	cout << "Sorted contents of the list are: " << endl;
-	names.sort();
-	DiplayContents(names);
+	cout << "Before case sensetive sort:" << endl;
+	DiplayContents(someWords);
 
-	cout << "Lower index where \"Brad\" can be inserted is: ";
-	auto minPos = lower_bound(names.begin(), names.end(), "Brad");
-	cout << distance(names.begin(), minPos) <<endl;
+	cout << endl << "After simple sort:" << endl;
+	someWords.sort();
+	DiplayContents(someWords);
 
-	cout << "Highest index where \"Brad\" can be inserted is: ";
-	auto maxPos = upper_bound(names.begin(), names.end(), "Brad");
-	cout << distance(names.begin(), maxPos) << endl;
-
-	cout << endl;
-
-	cout << "List after inserting Brad in sorted order: " << endl;
-	names.insert(minPos, "Brad");
-	DiplayContents(names);
+	cout << "After case insensitive sort: " << endl;
+	sort(someWords.begin(), someWords.end(),  CompareString(str1, str2));
 
 	return 0;
 }
