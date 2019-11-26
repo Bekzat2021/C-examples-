@@ -9,11 +9,8 @@
 #ifndef PCH_H
 #define PCH_H
 
-#include <algorithm>
-#include <list>
-#include <iostream>
+#include <stack>
 #include <vector>
-#include <deque>
 
 // TODO: add headers that you want to pre-compile here
 
