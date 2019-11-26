@@ -1,3 +1,2 @@
 ﻿  Hello.cpp
-c:\users\becza\desktop\c++\1.1\hello\hello.cpp(36): error C2065: 'str1': undeclared identifier
-c:\users\becza\desktop\c++\1.1\hello\hello.cpp(36): error C2065: 'str2': undeclared identifier
+  Hello.vcxproj -> C:\Users\Becza\Desktop\C++\1.1\Hello\Debug\Hello.exe

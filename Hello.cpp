@@ -8,8 +8,9 @@ template <typename T>
 void DiplayContents(const T &container) {
 	for (auto element = container.cbegin(); element != container.cend(); element++)
 	{
-		cout << *element << endl;
+		cout << *element <<' ';
 	}
+	cout << endl;
 }
 
 struct CompareString {
@@ -23,17 +24,26 @@ struct CompareString {
 };
 
 int main() {
-	list<string> someWords{ "oNe", "apple", "Two", "Three", "AA", "can", "DDS" };
+	list<int> numsInList{ 1, 2, 3, 4, 5, 6, 7, 8 };
+	vector<int> numsInVec{ 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 };
+	deque<int> numsInMap;
 
-	cout << "Before case sensetive sort:" << endl;
-	DiplayContents(someWords);
+	numsInMap.resize(numsInVec.size() + numsInList.size());
 
-	cout << endl << "After simple sort:" << endl;
-	someWords.sort();
-	DiplayContents(someWords);
+	cout << "Conents of the list:" << endl;
+	DiplayContents(numsInList);
 
-	cout << "After case insensitive sort: " << endl;
-	sort(someWords.begin(), someWords.end(),  CompareString(str1, str2));
+	cout << "Conents of the vector:" << endl;
+	DiplayContents(numsInList);
+
+	copy(numsInList.begin(), numsInList.end(), numsInMap.begin());
+	cout << "After copy: " << endl;
+	DiplayContents(numsInMap);
+	
+	deque<int>::iterator eight = find(numsInMap.begin(), numsInMap.end(), 8);
+	copy(numsInVec.begin(), numsInVec.end(), eight+1);
+	cout << "After second copy: " << endl;
+	DiplayContents(numsInMap);
 
 	return 0;
 }
