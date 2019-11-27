@@ -9,8 +9,8 @@
 #ifndef PCH_H
 #define PCH_H
 
-#include <stack>
-#include <vector>
+#include <queue>
+#include <functional>
 
 // TODO: add headers that you want to pre-compile here
 

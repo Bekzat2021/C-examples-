@@ -4,14 +4,14 @@
 
 int main() {
 	using namespace std;
+	
+	priority_queue<int> numsInPrioQ;
 
-	std::stack<int> numsInStack;
+	priority_queue<double> dblsInProQ;
 
-	stack<double> dbslInStack;
+	priority_queue<int, deque<int>, greater<int>> numsInDescendingQ;
 
-	stack<double, vector<double>> doublesStackedInVector;
-
-	std::stack<int> numsInStaclCopy(numsInStack);
+	priority_queue<int> copyQ(numsInPrioQ);
 
 	return 0;
 }
