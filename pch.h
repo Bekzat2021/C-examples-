@@ -12,6 +12,7 @@
 #include <queue>
 #include <iostream>
 #include <functional>
+#include <string>
 
 // TODO: add headers that you want to pre-compile here
 

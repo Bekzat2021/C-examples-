@@ -2,22 +2,28 @@
 
 #include "pch.h"
 
+class Person {
+public:
+	int age;
+	bool isFemale;
+	Person(int inputAge, bool inputIsFemale) :age(inputAge), isFemale(inputIsFemale) {};
+
+	operator const char *() {
+		return (char*)age;
+	}
+};
+
 int main() {
 	using namespace std;
 	
-	priority_queue<int, vector<int>, greater<int>> numsInPrioQ;
-	cout << "Inserting {10, 5, -1, 20} into the priority_queue" << endl;
-	numsInPrioQ.push(10);
-	numsInPrioQ.push(5);
-	numsInPrioQ.push(-1);
-	numsInPrioQ.push(20);
+	queue<Person> PostOfficeQueue;
 
-	cout << "Deleting the " << numsInPrioQ.size() << " elements" << endl;
-	while (!numsInPrioQ.empty())
-	{
-		cout << "Deleting topmost element: " << numsInPrioQ.top() << endl;
-		numsInPrioQ.pop();
-	}
+	Person personA(25,true);
+	Person personB(27,false);
+	Person personC(29,true);
+
+	PostOfficeQueue.push(personA);
+	cout << PostOfficeQueue.front() << endl;
 
 	return 0;
 }
