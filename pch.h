@@ -10,6 +10,7 @@
 #define PCH_H
 
 #include <queue>
+#include <iostream>
 #include <functional>
 
 // TODO: add headers that you want to pre-compile here
