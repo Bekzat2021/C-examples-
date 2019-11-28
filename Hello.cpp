@@ -2,28 +2,32 @@
 
 #include "pch.h"
 
-class Person {
-public:
-	int age;
-	bool isFemale;
-	Person(int inputAge, bool inputIsFemale) :age(inputAge), isFemale(inputIsFemale) {};
-
-	operator const char *() {
-		return (char*)age;
-	}
-};
-
 int main() {
 	using namespace std;
-	
-	queue<Person> PostOfficeQueue;
 
-	Person personA(25,true);
-	Person personB(27,false);
-	Person personC(29,true);
+	bitset<8> inputBits;
+	cout << "Enter a 8-bit sequence: ";
 
-	PostOfficeQueue.push(personA);
-	cout << PostOfficeQueue.front() << endl;
+	cin >> inputBits;
+
+	cout << "Num 1s you supplied: " << inputBits.count() << endl;
+	cout << "Num 0s you supplied: " << inputBits.size() - inputBits.count() << endl;
+
+	bitset<8> inputFlipped(inputBits);
+	inputFlipped.flip();
+
+	cout << "Flipped version is: " << inputFlipped << endl;
+
+	cout << "Result of AND, OR and XOR between two: " << endl;
+	cout << inputBits << " & " << inputFlipped << " = ";
+	cout << (inputBits&inputFlipped) << endl;
+
+	cout << inputBits << " | " << inputFlipped << " = ";
+	cout << (inputBits | inputFlipped) << endl;
+
+	cout << inputBits << " ^ " << inputFlipped << " = ";
+	cout << (inputBits ^ inputFlipped) << endl;
 
 	return 0;
+
 }

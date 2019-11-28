@@ -9,9 +9,8 @@
 #ifndef PCH_H
 #define PCH_H
 
-#include <queue>
+#include <bitset>
 #include <iostream>
-#include <functional>
 #include <string>
 
 // TODO: add headers that you want to pre-compile here
