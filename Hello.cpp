@@ -3,18 +3,30 @@
 #include "pch.h"
 using namespace std;
 
+template <typename T>
+class smart_pointer {
+private:
+	T* rawPtr;
+public:
+	smart_pointer(T *pData) :rawPtr(pData) {};
+	~smart_pointer() { delete rawPtr };
+
+	smart_pointer(const smart_pointer &anotherP);
+
+	smart_pointer& operator= (const smart_pointer &anotherSP);
+
+	T& operator * () const {
+		return rawPtr;
+	}
+
+	T* operator-> () const {
+		return rawPtr;
+	}
+};
+
 int main() {
 	
-	bitset<4> BitsetA("0110");
-	bitset<4> BitsetB("1000");
-
-	cout <<"A: "<< BitsetA << endl;
-	cout <<"B: "<< BitsetB << endl;
-
-	bitset<4> BitsetC(BitsetA | BitsetB);
-	cout << "|: " << BitsetC << endl;
-
-	cout << "F: " << BitsetC.flip() << endl;
+	
 
 	return 0;
 }
