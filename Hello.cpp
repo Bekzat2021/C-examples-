@@ -1,33 +1,20 @@
 // Hello.cpp : This file contains the 'main' function. Program execution begins and ends there.
 
 #include "pch.h"
+using namespace std;
 
 int main() {
-	using namespace std;
+	
+	bitset<4> BitsetA("0110");
+	bitset<4> BitsetB("1000");
 
-	bitset<8> inputBits;
-	cout << "Enter a 8-bit sequence: ";
+	cout <<"A: "<< BitsetA << endl;
+	cout <<"B: "<< BitsetB << endl;
 
-	cin >> inputBits;
+	bitset<4> BitsetC(BitsetA | BitsetB);
+	cout << "|: " << BitsetC << endl;
 
-	cout << "Num 1s you supplied: " << inputBits.count() << endl;
-	cout << "Num 0s you supplied: " << inputBits.size() - inputBits.count() << endl;
-
-	bitset<8> inputFlipped(inputBits);
-	inputFlipped.flip();
-
-	cout << "Flipped version is: " << inputFlipped << endl;
-
-	cout << "Result of AND, OR and XOR between two: " << endl;
-	cout << inputBits << " & " << inputFlipped << " = ";
-	cout << (inputBits&inputFlipped) << endl;
-
-	cout << inputBits << " | " << inputFlipped << " = ";
-	cout << (inputBits | inputFlipped) << endl;
-
-	cout << inputBits << " ^ " << inputFlipped << " = ";
-	cout << (inputBits ^ inputFlipped) << endl;
+	cout << "F: " << BitsetC.flip() << endl;
 
 	return 0;
-
 }
