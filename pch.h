@@ -9,10 +9,8 @@
 #ifndef PCH_H
 #define PCH_H
 
-#include <fstream>
-#include <iomanip>
 #include <iostream>
-#include <string>
+#include <exception>
 
 // TODO: add headers that you want to pre-compile here
 
