@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include <exception>
+#include <string>
 
 // TODO: add headers that you want to pre-compile here
 

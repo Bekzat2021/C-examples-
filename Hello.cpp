@@ -1,27 +1,42 @@
 // Hello.cpp : This file contains the 'main' function. Program execution begins and ends there.
 
 #include "pch.h"
-
 using namespace std;
 
+class CustomExpection :public std::exception {
+private:
+	string reason;
+public:
+	CustomExpection(const char* why) :reason(why) {};
+
+	virtual const char* what() const throw() {
+		return reason.c_str();
+	}
+};
+
+double Divide(double dividend, double divisor) {
+	if (divisor==0)
+		throw CustomExpection("CustomExpection: Dividing by 0 is a crime");
+
+	return (dividend / divisor);
+}
+
 int main() {
-	cout << "Enter number of integers you wish to reserve: ";
-	
+	cout << "Enter dividend: ";
+	double dividend = 0;
+	cin >> dividend;
+	cout << "Enter divisor: ";
+	double divisor = 0;
+	cin >> divisor;
+
 	try
 	{
-		int input = 0;
-		cin >> input;
-
-		int *numArray = new int[input];
-		delete[] numArray;
+		cout << "Result is: " << Divide(dividend, divisor);
 	}
-	catch (std::bad_alloc& exp)
+	catch (exception& exp)
 	{
-		cout << "Exception encountered: " << exp.what() << endl;
-		cout<<"Got to end, sorry!" << endl;
-	}
-	catch (...) {
-		cout << "Exception encountered. Go to end, sorry!" << endl;
+		cout << exp.what() << endl;
+		cout << "Sorry can't continue!" << endl;
 	}
 
 	return 0;
